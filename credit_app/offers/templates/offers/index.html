@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Кредитные офферы</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Выберите кредит</h1>
+        <div class="offers-grid">
+            {% for offer in offers %}
+                <div class="offer-card">
+                    <div class="logo">
+                        <img src="{{ offer.logo.url }}" alt="Логотип">
+                    </div>
+                    <div class="details">
+                        <p><strong>Сумма:</strong> {{ offer.amount }}</p>
+                        <p><strong>Срок:</strong> {{ offer.term }}</p>
+                        <p><strong>Без %:</strong> {{ offer.grace_period }}</p>
+                    </div>
+                    <div class="actions">
+                        <a href="{{ offer.apply_url }}" target="_blank" class="btn apply">
+                            Получить деньги
+                        </a>
+                        <button class="btn info" onclick="showDetails({{ offer.id }})">
+                            i
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Модальное окно с подробностями -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Подробная информация</h3>
+            <div id="modal-text"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
